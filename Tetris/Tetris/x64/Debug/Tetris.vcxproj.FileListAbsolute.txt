@@ -1,0 +1,1 @@
+C:\Github\Tetris\Tetris\Tetris\x64\Debug\Tetris.vcxproj.CopyComplete
