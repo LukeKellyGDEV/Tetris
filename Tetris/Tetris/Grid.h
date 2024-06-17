@@ -11,7 +11,6 @@ public:
 	void Print();
 	int GridArray[20][10];
 private:
-	std::vector<Color> GetCellColours();
 	int NumRows;
 	int NumCols;
 	int CellSize;
