@@ -44,4 +44,15 @@ void Grid::Print()
 		}
 		std::cout << std::endl;
 	}
-}		
+}
+
+bool Grid::IsCellOustide(int Row, int Column)
+{
+	if (Row >= 0 && Row < NumRows && Column >= 0 && Column < NumCols)
+	{
+		return false;
+	}
+
+	return true;
+
+}

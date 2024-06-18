@@ -9,6 +9,7 @@ public:
 	void Initialize();
 	void Draw();
 	void Print();
+	bool IsCellOustide(int Row, int Column);
 	int GridArray[20][10];
 private:
 	int NumRows;

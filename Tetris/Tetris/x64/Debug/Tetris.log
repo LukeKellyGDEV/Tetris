@@ -1,4 +1,5 @@
-﻿  Block.cpp
+﻿  Game.cpp
+  Grid.cpp
   main.cpp
   Generating Code...
   Tetris.vcxproj -> C:\Github\Tetris\Tetris\x64\Debug\Tetris.exe
