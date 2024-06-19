@@ -1,7 +1,4 @@
-﻿  Game.cpp
-  Grid.cpp
-  main.cpp
-  Generating Code...
+﻿  Grid.cpp
   Tetris.vcxproj -> C:\Github\Tetris\Tetris\x64\Debug\Tetris.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.
