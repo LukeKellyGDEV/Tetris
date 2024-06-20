@@ -9,6 +9,7 @@ Game::Game()
 	CurrentBlock = GetRandomBlock();
 	NextBlock = GetRandomBlock();
 	GameOver = false;
+	Score = 0;
 }
 
 Block Game::GetRandomBlock()
@@ -32,7 +33,19 @@ std::vector<Block> Game::GetAllBlocks()
 void Game::Draw()
 {
 	grid.Draw();
-	CurrentBlock.Draw();
+	CurrentBlock.Draw(11, 11);
+	switch (NextBlock.ID)
+	{
+	case 3:
+		NextBlock.Draw(255, 290);
+		break;
+	case 4:
+		NextBlock.Draw(255, 290);
+		break;
+	default:
+		NextBlock.Draw(270, 270);
+		break;
+	}
 }
 
 void Game::HandleInput()
@@ -48,6 +61,7 @@ void Game::HandleInput()
 			break;
 		case KEY_DOWN:
 			MoveBlockDown();
+			UpdateScore(0, 1);
 			break;
 		case KEY_UP:
 			RotateBlock();
@@ -136,7 +150,8 @@ void Game::LockBlock()
 		GameOver = true;
 	}
 	NextBlock = GetRandomBlock();
-	grid.ClearFullRows();
+	int RowsCleared = grid.ClearFullRows();
+	UpdateScore(RowsCleared, 0);
 }
 
 bool Game::BlockFits()
@@ -158,6 +173,7 @@ void Game::Reset()
 	Blocks = GetAllBlocks();
 	CurrentBlock = GetRandomBlock();
 	NextBlock = GetRandomBlock();
+	Score = 0;
 }
 
 void Game::Gameover()
@@ -167,4 +183,28 @@ void Game::Gameover()
 		GameOver = false;
 		Reset();
 	}
+}
+
+void Game::UpdateScore(int LinesCleared, int MoveDownPoints)
+{
+	switch (LinesCleared)
+	{
+	case 1:
+		Score += 50;
+		break;
+	case 2:
+		Score += 125;
+		break;
+	case 3:
+		Score += 300;
+		break;
+	default:
+		break;
+	}
+	if (LinesCleared > 3)
+	{
+		Score += 500;
+	}
+
+	Score += MoveDownPoints;
 }
