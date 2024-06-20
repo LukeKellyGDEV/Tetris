@@ -1,4 +1,6 @@
-﻿  Grid.cpp
+﻿  main.cpp
+C:\Github\Tetris\Tetris\Tetris\main.cpp(41,63): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(42,65): warning C4305: 'argument': truncation from 'double' to 'float'
   Tetris.vcxproj -> C:\Github\Tetris\Tetris\x64\Debug\Tetris.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

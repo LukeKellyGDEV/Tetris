@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <random>
+#include <iostream>
 
 Game::Game()
 {
@@ -7,6 +8,7 @@ Game::Game()
 	Blocks = GetAllBlocks();
 	CurrentBlock = GetRandomBlock();
 	NextBlock = GetRandomBlock();
+	GameOver = false;
 }
 
 Block Game::GetRandomBlock()
@@ -40,44 +42,59 @@ void Game::HandleInput()
 	{
 		case KEY_LEFT:
 			MoveBlockLeft();
-		break;
+			break;
 		case KEY_RIGHT:
 			MoveBlockRight();
-		break;
+			break;
 		case KEY_DOWN:
 			MoveBlockDown();
-		break;
+			break;
 		case KEY_UP:
 			RotateBlock();
+			break;
+		case KEY_ENTER:
+			Gameover();
+			break;
+		case KEY_SPACE:
+			Gameover();
 			break;
 	}
 }
 
 void Game::MoveBlockLeft()
 {
-	CurrentBlock.Move(0, -1);
-	if (IsBlockOutside() || BlockFits() == false)
+	if (!GameOver)
 	{
-		CurrentBlock.Move(0, 1);
+		CurrentBlock.Move(0, -1);
+		if (IsBlockOutside() || BlockFits() == false)
+		{
+			CurrentBlock.Move(0, 1);
+		}
 	}
 }
 
 void Game::MoveBlockRight()
 {
-	CurrentBlock.Move(0, 1);
-	if (IsBlockOutside() || BlockFits() == false)
+	if (!GameOver)
 	{
-		CurrentBlock.Move(0, -1);
+		CurrentBlock.Move(0, 1);
+		if (IsBlockOutside() || BlockFits() == false)
+		{
+			CurrentBlock.Move(0, -1);
+		}
 	}
 }
 
 void Game::MoveBlockDown()
 {
-	CurrentBlock.Move(1, 0);
-	if (IsBlockOutside() || BlockFits() == false)
+	if (!GameOver)
 	{
-		CurrentBlock.Move(-1, 0);
-		LockBlock();
+		CurrentBlock.Move(1, 0);
+		if (IsBlockOutside() || BlockFits() == false)
+		{
+			CurrentBlock.Move(-1, 0);
+			LockBlock();
+		}
 	}
 }
 
@@ -96,10 +113,13 @@ bool Game::IsBlockOutside()
 
 void Game::RotateBlock()
 {
-	CurrentBlock.Rotate();
-	if (IsBlockOutside() || BlockFits() == false)
+	if (!GameOver)
 	{
-		CurrentBlock.UndoRotation();
+		CurrentBlock.Rotate();
+		if (IsBlockOutside() || BlockFits() == false)
+		{
+			CurrentBlock.UndoRotation();
+		}
 	}
 }
 
@@ -111,6 +131,10 @@ void Game::LockBlock()
 		grid.GridArray[Item.Row][Item.Column] = CurrentBlock.ID;
 	}
 	CurrentBlock = NextBlock;
+	if (BlockFits() == false)
+	{
+		GameOver = true;
+	}
 	NextBlock = GetRandomBlock();
 	grid.ClearFullRows();
 }
@@ -126,4 +150,21 @@ bool Game::BlockFits()
 		}
 	}
 	return true;
+}
+
+void Game::Reset()
+{
+	grid.Initialize();
+	Blocks = GetAllBlocks();
+	CurrentBlock = GetRandomBlock();
+	NextBlock = GetRandomBlock();
+}
+
+void Game::Gameover()
+{
+	if (GameOver)
+	{
+		GameOver = false;
+		Reset();
+	}
 }

@@ -29,7 +29,7 @@ void Grid::Draw()
 		for (int Column = 0; Column < NumCols; Column++)
 		{
 			int CellValue = GridArray[Row][Column];
-			DrawRectangle(Column * CellSize + 1, Row * CellSize + 1, CellSize -1, CellSize -1, Colours[CellValue]);
+			DrawRectangle(Column * CellSize + 11, Row * CellSize + 11, CellSize -1, CellSize -1, Colours[CellValue]);
 		}
 	}
 }
