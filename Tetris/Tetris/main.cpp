@@ -4,7 +4,6 @@
 #include <iostream>
 
 double LastUpdateTime = 0;
-double GameSpeed = 0.3;
 
 bool EventTriggered(double Interval)
 {
@@ -20,8 +19,9 @@ bool EventTriggered(double Interval)
 int main()
 {
 	double GameSpeed = 0.3;
-	InitWindow(500, 620, "Tetris");
+	InitWindow(700, 620, "Tetris");
 	SetTargetFPS(60);
+	std::cout << LastUpdateTime << std::endl;
 
 	Font font = LoadFontEx("Font/Retroica.ttf", 64, 0, 0);
 
@@ -30,19 +30,22 @@ int main()
 	while (WindowShouldClose() == false)
 	{
 		game.HandleInput();
-		if (game.Score >= 100)
+		if (game.Pause == false && game.GameOver == false)
 		{
-			GameSpeed = 0.1;
+			if (EventTriggered(game.GameSpeed))
+			{
+				game.MoveBlockDown();
+			}
 		}
-		if (EventTriggered(GameSpeed))
+		if (game.grid.RowsCompleted >= 10)
 		{
-			game.MoveBlockDown();
+			game.grid.RowsCompleted = 0;
+			game.GameSpeed -= 0.01;
 		}
-
 		BeginDrawing();
 		ClearBackground(DarkBlue);
-		DrawTextEx(font, "Score", { 345, 15 },38 ,2 , WHITE);
-		DrawTextEx(font, "Next", { 355, 175 },38 ,2 , WHITE);
+		DrawTextEx(font, "Score", { 365, 25 },24 ,2 , WHITE);
+		DrawTextEx(font, "Next", { 370, 185 },24 ,2 , WHITE);
 		DrawRectangleRounded({ 320, 55, 170, 60 }, 0.3, 6, LightBlue);
 
 		char ScoreText[10];
@@ -53,12 +56,35 @@ int main()
 
 		DrawRectangleRounded({ 320, 215, 170, 180 }, 0.3, 6, LightBlue);
 		game.Draw();
+		
+		//LeaderBoard
+		DrawTextEx(font, "Leaderboard:", { 505, 25 },24 ,2 , WHITE);
+		DrawRectangleRounded({ 505, 55, 180, 40 }, 0.3, 6, LightBlue);
+		DrawRectangleRounded({ 505, 110, 180, 40 }, 0.3, 6, LightBlue);
+		DrawRectangleRounded({ 505, 165, 180, 40 }, 0.3, 6, LightBlue);
+		DrawRectangleRounded({ 505, 220, 180, 40 }, 0.3, 6, LightBlue);
+		DrawRectangleRounded({ 505, 275, 180, 40 }, 0.3, 6, LightBlue);
+		DrawRectangleRounded({ 505, 330, 180, 40 }, 0.3, 6, LightBlue);
+		DrawRectangleRounded({ 505, 385, 180, 40 }, 0.3, 6, LightBlue);
+		DrawRectangleRounded({ 505, 440, 180, 40 }, 0.3, 6, LightBlue);
+		DrawRectangleRounded({ 505, 495, 180, 40 }, 0.3, 6, LightBlue);
+		DrawRectangleRounded({ 505, 550, 180, 40 }, 0.3, 6, LightBlue);
+
 		if (game.GameOver)
 		{
-			DrawTextEx(font, "Game Over", { 325, 450 }, 24, 2, WHITE);
+			DrawTextEx(font, "Game Over", { 325, 450 }, 24, 2, RED);
 			DrawTextEx(font, "Press Space", { 320, 485}, 24, 2, WHITE);
 			DrawTextEx(font, "or Enter Key", { 315, 520}, 24, 2, WHITE);
 			DrawTextEx(font, "to Restart", { 330, 555 }, 24, 2, WHITE);
+		}
+		else
+		{
+			if (game.Pause)
+			{
+				DrawTextEx(font, "Paused", { 350, 450 }, 24, 2, RED);
+			}
+			DrawTextEx(font, "Press P", { 350, 485 }, 24, 2, WHITE);
+			DrawTextEx(font, "To Pause", { 340, 520 }, 24, 2, WHITE);
 		}
 		EndDrawing();
 	}

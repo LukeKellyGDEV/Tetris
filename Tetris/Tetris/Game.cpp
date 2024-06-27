@@ -9,6 +9,7 @@ Game::Game()
 	CurrentBlock = GetRandomBlock();
 	NextBlock = GetRandomBlock();
 	GameOver = false;
+	Pause = false;
 	Score = 0;
 }
 
@@ -40,7 +41,7 @@ void Game::Draw()
 		NextBlock.Draw(255, 290);
 		break;
 	case 4:
-		NextBlock.Draw(255, 290);
+		NextBlock.Draw(255, 275);
 		break;
 	default:
 		NextBlock.Draw(270, 270);
@@ -51,33 +52,45 @@ void Game::Draw()
 void Game::HandleInput()
 {
 	int KeyPressed = GetKeyPressed();
-	switch(KeyPressed)
+	switch (KeyPressed)
 	{
-		case KEY_LEFT:
-			MoveBlockLeft();
-			break;
-		case KEY_RIGHT:
-			MoveBlockRight();
-			break;
-		case KEY_DOWN:
-			MoveBlockDown();
-			UpdateScore(0, 1);
-			break;
-		case KEY_UP:
-			RotateBlock();
-			break;
-		case KEY_ENTER:
-			Gameover();
-			break;
-		case KEY_SPACE:
-			Gameover();
-			break;
+	case KEY_LEFT:
+		MoveBlockLeft();
+		break;
+	case KEY_RIGHT:
+		MoveBlockRight();
+		break;
+	case KEY_DOWN:
+		MoveBlockDown();
+		if (!GameOver && !Pause) UpdateScore(0, 1);
+		break;
+	case KEY_UP:
+		RotateBlock();
+		break;
+	case KEY_ENTER:
+		Gameover();
+		break;
+	case KEY_SPACE:
+		Gameover();
+		break;
+	case KEY_P:
+		if(Pause == false)
+		{
+			Pause = true;
+			return;
+		}
+		else
+		{
+			Pause = false;
+			return;
+		}
+		break;
 	}
 }
 
 void Game::MoveBlockLeft()
 {
-	if (!GameOver)
+	if (!GameOver && !Pause)
 	{
 		CurrentBlock.Move(0, -1);
 		if (IsBlockOutside() || BlockFits() == false)
@@ -89,7 +102,7 @@ void Game::MoveBlockLeft()
 
 void Game::MoveBlockRight()
 {
-	if (!GameOver)
+	if (!GameOver && !Pause)
 	{
 		CurrentBlock.Move(0, 1);
 		if (IsBlockOutside() || BlockFits() == false)
@@ -101,7 +114,7 @@ void Game::MoveBlockRight()
 
 void Game::MoveBlockDown()
 {
-	if (!GameOver)
+	if (!GameOver && !Pause)
 	{
 		CurrentBlock.Move(1, 0);
 		if (IsBlockOutside() || BlockFits() == false)
@@ -127,7 +140,7 @@ bool Game::IsBlockOutside()
 
 void Game::RotateBlock()
 {
-	if (!GameOver)
+	if (!GameOver && !Pause)
 	{
 		CurrentBlock.Rotate();
 		if (IsBlockOutside() || BlockFits() == false)
@@ -174,6 +187,7 @@ void Game::Reset()
 	CurrentBlock = GetRandomBlock();
 	NextBlock = GetRandomBlock();
 	Score = 0;
+	GameSpeed = 0.3;
 }
 
 void Game::Gameover()
@@ -205,6 +219,5 @@ void Game::UpdateScore(int LinesCleared, int MoveDownPoints)
 	{
 		Score += 500;
 	}
-
 	Score += MoveDownPoints;
 }

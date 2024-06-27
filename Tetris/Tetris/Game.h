@@ -14,8 +14,10 @@ public:
 	void MoveBlockRight();
 	void MoveBlockDown();
 	Grid grid;
+	bool Pause;
 	bool GameOver;
 	int Score;
+	double GameSpeed = 0.3;
 private:
 	bool IsBlockOutside();
 	void RotateBlock();

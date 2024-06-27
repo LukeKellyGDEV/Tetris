@@ -13,6 +13,7 @@ public:
 	bool IsCellEmpty(int Row, int Column);
 	int ClearFullRows();
 	int GridArray[20][10];
+	int RowsCompleted;
 private:
 	bool IsRowFull(int Row);
 	void ClearRow(int Row);

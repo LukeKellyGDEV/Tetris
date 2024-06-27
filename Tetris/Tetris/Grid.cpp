@@ -74,6 +74,7 @@ int Grid::ClearFullRows()
 		if (IsRowFull(Row))
 		{
 			ClearRow(Row);
+			RowsCompleted++;
 			Completed++;
 		}
 		else if (Completed > 0)

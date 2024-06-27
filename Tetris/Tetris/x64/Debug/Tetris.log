@@ -1,6 +1,16 @@
 ﻿  main.cpp
-C:\Github\Tetris\Tetris\Tetris\main.cpp(46,63): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Github\Tetris\Tetris\Tetris\main.cpp(54,65): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(49,63): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(57,65): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(62,63): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(63,64): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(64,64): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(65,64): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(66,64): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(67,64): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(68,64): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(69,64): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(70,64): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Github\Tetris\Tetris\Tetris\main.cpp(71,64): warning C4305: 'argument': truncation from 'double' to 'float'
   Tetris.vcxproj -> C:\Github\Tetris\Tetris\x64\Debug\Tetris.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.
